@@ -9,6 +9,8 @@ const Stack = createNativeStackNavigator();
 //* import screen { logIn, home }
 import LogIn from "../screens/loginScreen";
 import SignUp from "../screens/signUPScreen";
+import HomeNavigator from "./homeNavigator";
+
 
 export default function LoginNav() {
   return (
@@ -19,6 +21,7 @@ export default function LoginNav() {
       >
         <Stack.Screen name="login" component={LogIn} />
         <Stack.Screen name="signup" component={SignUp} />
+        <Stack.Screen name="home" component={HomeNavigator}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
