@@ -27,8 +27,7 @@
     "react-native-web": "0.17.7",
     "react-navigation": "^4.4.4",
     "expo-linear-gradient": "~11.3.0",
-    
-    "yup": "^0.32.11",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
