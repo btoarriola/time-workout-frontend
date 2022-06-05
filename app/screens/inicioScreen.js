@@ -9,7 +9,7 @@ export default function inicioScreen(){
 
     return(
         <View style={styles.viewPrincipal}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
             <LinearGradient colors={['#23529E','#44B115']} locations={[0.08,0.65]}>
                 <View style={{height: ancho}}>
                     <View style={styles.cabezaView}><Text style={styles.titulo}>TIME WORKOUT</Text></View>
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
         borderRadius: 100,
         height: 38,
         justifyContent: "center",
-        marginTop: 30,
+        marginTop: 25,
         marginBottom: 5,
         marginHorizontal: "9%",
         width: "82%",
