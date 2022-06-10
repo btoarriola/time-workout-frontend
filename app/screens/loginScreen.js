@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   bottonView: {
     height: (SCREEN_HEIGHT / 10) * 7,
     width: WINDOW_WIDTH,
-    backgroundColor: "#000",
+    backgroundColor: "#333",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
   },
