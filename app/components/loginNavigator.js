@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 import LogIn from "../screens/loginScreen";
 import SignUp from "../screens/signUPScreen";
 import HomeNavigator from "./homeNavigator";
-
+import UploadProfilePictureScreen from "../screens/uploadProfilePictureScreen";
 
 export default function LoginNav() {
   return (
@@ -21,7 +21,11 @@ export default function LoginNav() {
       >
         <Stack.Screen name="login" component={LogIn} />
         <Stack.Screen name="signup" component={SignUp} />
-        <Stack.Screen name="home" component={HomeNavigator}/>
+        <Stack.Screen
+          name="uploadImage"
+          component={UploadProfilePictureScreen}
+        />
+        <Stack.Screen name="home" component={HomeNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
