@@ -12,6 +12,9 @@ import {
   SafeAreaView,
 } from "react-native";
 
+//* imports components
+import SignUpForm from "../components/signUpForm";
+
 //* constants for Screen manage
 const SCREEN_HEIGHT = Dimensions.get("screen").height; // device height
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
@@ -41,81 +44,7 @@ export default function SignUp({ navigation }) {
         <View style={styles.bottonView}>
           <Text style={styles.heading}>Create Account</Text>
           <ScrollView>
-            <View style={styles.formView}>
-              <TextInput
-                placeholder="First name"
-                placeholderTextColor={"#fff"}
-                autoCapitalize="words"
-                style={styles.textInput}
-              />
-              <TextInput
-                placeholder="Last name"
-                placeholderTextColor={"#fff"}
-                autoCapitalize="words"
-                style={styles.textInput}
-              />
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor={"#fff"}
-                autoCapitalize="none"
-                secureTextEntry
-                style={styles.textInput}
-              />
-              <TextInput
-                placeholder="Email address"
-                placeholderTextColor={"#fff"}
-                autoCapitalize="none"
-                style={styles.textInput}
-              />
-              <TextInput
-                placeholder="Gender"
-                placeholderTextColor={"#fff"}
-                autoCapitalize="none"
-                style={styles.textInput}
-              />
-              <View style={{ flexDirection: "row" }}>
-                <TextInput
-                  placeholder="Birthday"
-                  placeholderTextColor={"#fff"}
-                  autoCapitalize="none"
-                  style={[
-                    styles.textInput,
-                    { width: ((WINDOW_WIDTH / 10) * 8.5) / 3 },
-                  ]}
-                />
-                <TextInput
-                  placeholder="Birthday"
-                  placeholderTextColor={"#fff"}
-                  autoCapitalize="none"
-                  style={[
-                    styles.textInput,
-                    { width: ((WINDOW_WIDTH / 10) * 8.5) / 3 },
-                  ]}
-                />
-                <TextInput
-                  placeholder="Birthday"
-                  placeholderTextColor={"#fff"}
-                  autoCapitalize="none"
-                  style={[
-                    styles.textInput,
-                    { width: ((WINDOW_WIDTH / 10) * 8.5) / 3 },
-                  ]}
-                />
-              </View>
-              <TextInput
-                placeholder="Nationality"
-                placeholderTextColor={"#fff"}
-                autoCapitalize="none"
-                style={styles.textInput}
-              />
-              {/* TODO: diseñar logica para validar form */}
-              <TouchableOpacity style={styles.buttonSubmit}>
-                <Text style={styles.buttonSubmitText}>Sign up</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.textButton}>
-                <Text style={{ color: "gray" }}>Sign in</Text>
-              </TouchableOpacity>
-            </View>
+            <SignUpForm navigation={navigation} />
           </ScrollView>
         </View>
       </View>
