@@ -1,4 +1,5 @@
 import React from "react";
+import { StackActions } from "@react-navigation/native";
 
 //* imports for FORMS
 import { Form, Formik } from "formik";
@@ -19,7 +20,7 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-export default function SignInForm() {
+export default function SignInForm({ navigation }) {
   const userInfo = {
     email: "",
     password: "",
@@ -29,8 +30,11 @@ export default function SignInForm() {
       ...values,
     });
     console.log(res.data);
-    formikActions.resetForm();
-    formikActions.setSubmitting(false);
+    if (res.data.success) {
+      formikActions.resetForm();
+      formikActions.setSubmitting(false);
+      navigation.dispatch(StackActions.replace("home", res.data));
+    }
   };
   return (
     <FormComponent>
