@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     width: (WINDOW_WIDTH / 10) * 8.5,
     borderRadius: 18,
     marginTop: 20,
+    marginBottom: 15,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
