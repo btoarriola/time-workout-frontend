@@ -1,3 +1,4 @@
+import { StackActions } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -33,7 +34,7 @@ export default function LogIn({ navigation }) {
      */
   }
   function navigateToSignUp() {
-    navigation.navigate("signup");
+    navigation.dispatch(StackActions.replace("signup"));
   }
 
   return (
@@ -50,7 +51,7 @@ export default function LogIn({ navigation }) {
         </View>
         <View style={styles.bottonView}>
           <Text style={styles.heading}>Welcome{"\n"}Back</Text>
-          <SignInForm />
+          <SignInForm navigation={navigation} />
           <TouchableOpacity
             style={styles.textButton}
             onPress={navigateToSignUp}

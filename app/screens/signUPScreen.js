@@ -1,3 +1,4 @@
+import { StackActions } from "@react-navigation/native";
 import React from "react";
 import {
   View,
@@ -33,7 +34,7 @@ export default function SignUp({ navigation }) {
      */
   }
   function navigateToSigIn() {
-    navigation.navigate("signin");
+    navigation.dispatch(StackActions.replace("login"));
   }
   return (
     <SafeAreaView style={[{ ...StyleSheet.absoluteFill }, styles.container]}>
@@ -42,8 +43,21 @@ export default function SignUp({ navigation }) {
           <Image source={require("../assets/patternLogin.jpg")} />
         </View>
         <View style={styles.bottonView}>
-          <Text style={styles.heading}>Create Account</Text>
+          <TouchableOpacity onPress={navigateToSigIn}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 37,
+                fontWeight: "bold",
+                marginLeft: 30,
+                marginTop: 5,
+              }}
+            >
+              {"<"}
+            </Text>
+          </TouchableOpacity>
           <ScrollView>
+            <Text style={styles.heading}>Create Account</Text>
             <SignUpForm navigation={navigation} />
           </ScrollView>
         </View>
@@ -54,7 +68,7 @@ export default function SignUp({ navigation }) {
 
 const styles = StyleSheet.create({
   bottonView: {
-    height: (SCREEN_HEIGHT / 10) * 8,
+    height: (ANDROID_SCREEN_WITHOUT_BOTTON_NAV / 10) * 8,
     width: WINDOW_WIDTH,
     backgroundColor: "#000",
     borderTopLeftRadius: 40,
@@ -77,7 +91,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   formView: {
@@ -92,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: "bold",
     marginLeft: 30,
-    marginTop: 60,
+    marginTop: 15,
   },
   textButton: {
     width: "100%",
@@ -111,7 +125,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   topView: {
-    height: (SCREEN_HEIGHT / 10) * 2,
+    height: (ANDROID_SCREEN_WITHOUT_BOTTON_NAV / 10) * 2,
     width: WINDOW_WIDTH,
     backgroundColor: "#000",
   },
