@@ -99,14 +99,19 @@ export default function SignUpForm({ navigation }) {
       profilePicture: imageUrl,
     };
     console.log(values);
-    const res = await apiServer.post("/auth/register", {
+    await apiServer.post("/auth/register", {
       ...values,
     });
-    console.log(res);
-    if (res.data) {
+
+    const res = await apiServer.post("/auth/login", {
+      email: values.email,
+      password: values.password,
+    });
+
+    if (res.data.success) {
       formikActions.resetForm();
       formikActions.setSubmitting(false);
-      navigation.dispatch(StackActions.replace("uploadImage", res.data.data));
+      navigation.dispatch(StackActions.replace("uploadImage", res.data));
     }
     // }
     // } catch (err) {
