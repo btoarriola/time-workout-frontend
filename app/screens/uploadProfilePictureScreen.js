@@ -9,6 +9,7 @@ import {
   StatusBar,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { StackActions } from "@react-navigation/native";
 
 import Ionicons from "react-native-vector-icons/Ionicons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
@@ -30,7 +31,11 @@ import imageUploadHandler from "../handlers/imageUploadHandler";
 import apiServer from "../api/apiServer";
 
 export default function UploadProfilePictureScreen(props) {
-  let user = props.route.params.user;
+  let data = props.route.params.data;
+  let user = data.userFound;
+  let token = data.token;
+  let { navigation } = props;
+
   JSON.stringify(user);
   const [image, setImage] = useState(null);
 
@@ -51,26 +56,38 @@ export default function UploadProfilePictureScreen(props) {
 
   const uploadImage = async () => {
     console.log(user);
-    if (image) {
-      const profilePicture = await imageUploadHandler(image);
-      console.log("userWithImage", user);
-      const res = await apiServer.put(
-        "/auth/edit",
-        { ...user, profilePicture: profilePicture },
-        {
-          headers: {
-            Accept: "aplication/json",
-            "Content-type": "aplication/json",
-            Authorization: `Bearer ${user.token}`,
+    try {
+      if (image) {
+        const profilePicture = await imageUploadHandler(image);
+        console.log("userWithImage", user, profilePicture);
+        console.log(token);
+        const res = await apiServer.put(
+          "/auth/edit",
+          {
+            ...user,
+            profilePicture: profilePicture,
+            password: "secretPassword?",
           },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(res);
+
+        console.log("LOS PROPS", props);
+        console.log("LA NAVIGATION", navigation);
+        if (res.data.success) {
+          navigation.dispatch(StackActions.replace("home", res.data));
         }
-      );
-      console.log(res);
-      if (res.data) {
-        navigation.dispatch(StackActions.replace("home", ...res.data));
+      } else {
+        navigation.dispatch(StackActions.replace("home", user));
       }
-    } else {
-      navigation.dispatch(StackActions.replace("home", user));
+    } catch (err) {
+      console.log(err);
+      //FIXME: manage errors
     }
   };
 
