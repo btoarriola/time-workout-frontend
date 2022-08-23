@@ -86,38 +86,35 @@ export default function SignUpForm({ navigation }) {
 
   //! Handle submit button actions
   const apiSignUp = async (values, formikActions) => {
-    // try {
-    //   if (formatedDate === "0000-00-00") {
-    //     alert("Select your birhtday");
-    //   } else {
-    const imageUrl =
-      "https://res.cloudinary.com/ditqkou9h/image/upload/v1654591065/profile-picture.png";
-    values = {
-      ...values,
-      nationality: chooseData,
-      birthday: formatedDate,
-      profilePicture: imageUrl,
-    };
-    console.log(values);
-    await apiServer.post("/auth/register", {
-      ...values,
-    });
+    try {
+      //   if (formatedDate === "0000-00-00") {
+      //     alert("Select your birhtday");
+      //   } else {
+      const imageUrl =
+        "https://res.cloudinary.com/ditqkou9h/image/upload/v1654591065/profile-picture.png";
 
-    const res = await apiServer.post("/auth/login", {
-      email: values.email,
-      password: values.password,
-    });
+      await apiServer.post("/auth/register", {
+        ...values,
+        nationality: chooseData,
+        birthday: formatedDate,
+        profilePicture: imageUrl,
+      });
 
-    if (res.data.success) {
-      formikActions.resetForm();
-      formikActions.setSubmitting(false);
-      navigation.dispatch(StackActions.replace("uploadImage", res.data));
+      const res = await apiServer.post("/auth/login", {
+        email: values.email,
+        password: values.password,
+      });
+
+      if (res.data.success) {
+        formikActions.resetForm();
+        formikActions.setSubmitting(false);
+        navigation.dispatch(StackActions.replace("uploadImage", res.data));
+      }
+      // }
+    } catch (err) {
+      console.log(err.toJSON());
+      alert(JSON.stringify(err));
     }
-    // }
-    // } catch (err) {
-    //   console.log(err.toJSON());
-    //   alert(JSON.stringify(err));
-    // }
   };
 
   //* Modals
