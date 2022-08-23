@@ -59,14 +59,10 @@ export default function UploadProfilePictureScreen(props) {
     try {
       if (image) {
         const profilePicture = await imageUploadHandler(image);
-        console.log("userWithImage", user, profilePicture);
-        console.log(token);
         const res = await apiServer.put(
           "/auth/edit",
           {
-            ...user,
             profilePicture: profilePicture,
-            password: "secretPassword?",
           },
           {
             headers: {
@@ -75,10 +71,10 @@ export default function UploadProfilePictureScreen(props) {
           }
         );
 
-        console.log(res);
+        // console.log(res);
 
-        console.log("LOS PROPS", props);
-        console.log("LA NAVIGATION", navigation);
+        // console.log("LOS PROPS", props);
+        // console.log("LA NAVIGATION", navigation);
         if (res.data.success) {
           navigation.dispatch(StackActions.replace("home", res.data));
         }
@@ -117,9 +113,13 @@ export default function UploadProfilePictureScreen(props) {
         <View style={styles.bottomView}>
           <View style={styles.userInfoContainer}>
             <View style={styles.nameContainer}>
-              <SimpleLineIcons name="user" size={16} />
-              <SimpleLineIcons name="user-female" size={16} />
-              <Text style={styles.nameText}>Ingrese el suario!</Text>
+              {user.gender === "M" ? (
+                <SimpleLineIcons name="user" size={16} />
+              ) : (
+                <SimpleLineIcons name="user-female" size={16} />
+              )}
+
+              <Text style={styles.nameText}>{user.name}</Text>
             </View>
           </View>
           <View style={styles.continueContainer}>
